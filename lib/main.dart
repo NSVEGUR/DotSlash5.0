@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left:56),
-                  child: Text('Login as',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Color(0xFF236248)),),
+                  child: Text('Join as',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Color(0xFF236248)),),
                 ),
                 //login buttons
                 GestureDetector(
@@ -120,6 +120,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>login()));
+                  },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical:8,horizontal: 50),
                     child: Container(
@@ -151,32 +154,39 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical:8,horizontal: 50),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Color(0xFFE0FFF2),
-                        borderRadius: BorderRadius.all(Radius.circular(20))
+                
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>login()));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical:8,horizontal: 50),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Color(0xFFE0FFF2),
+                          borderRadius: BorderRadius.all(Radius.circular(20))
 
 
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(),
-                          Text('Consumer',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.grey),),
-                          Container(
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(25))
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(),
+                            Text('Consumer',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.grey),),
+                            Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(25))
+                              ),
+                              child: Icon(Icons.arrow_forward_rounded ,color:Color(
+                                  0xFF2FB37B)
+                                ,size: 30, ),
                             ),
-                            child: Icon(Icons.arrow_forward_rounded ,color:Color(0xFF2FB37B)
-                              ,size: 30, ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
