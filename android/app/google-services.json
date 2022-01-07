@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "526618632838",
+    "project_id": "dotslash5",
+    "storage_bucket": "dotslash5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:526618632838:android:f76b9dd2feb437df0fe707",
+        "android_client_info": {
+          "package_name": "com.example.dotslash5"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "526618632838-s8l3e65i8hcefe77tghjunf5hnb5895l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDw1aKyMaV-vVRFtleLeUtk2jtmWuFxx3g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "526618632838-s8l3e65i8hcefe77tghjunf5hnb5895l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
