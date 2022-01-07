@@ -26,16 +26,19 @@ class _LoginState extends State<Login> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 36.0, left: 8),
-                child: Container(
-                  height: 50,
-                  width: 50,
-                  decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.all(Radius.circular(25))),
-                  child: Icon(
-                    Icons.arrow_back_rounded,
-                    color: Colors.white,
-                    size: 30,
+                child: GestureDetector(
+                  onTap: (){ Navigator.pop(context);},
+                  child: Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.all(Radius.circular(25))),
+                    child: Icon(
+                      Icons.arrow_back_rounded,
+                      color: Colors.white,
+                      size: 30,
+                    ),
                   ),
                 ),
               ),

@@ -121,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 GestureDetector(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) =>login()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>Login(1)));
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical:8,horizontal: 50),
@@ -157,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 
                 GestureDetector(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>login()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Login(2)));
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical:8,horizontal: 50),
