@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'screens/login.dart';
+import 'package:dotslash5/screens/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,7 +28,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
-  Widget build(BuildContext context) {
+      Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Colors.white,
@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 GestureDetector(
                   onTap: (){
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => login()));
+                        MaterialPageRoute(builder: (context) => Login(0)));
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical:8,horizontal: 50),

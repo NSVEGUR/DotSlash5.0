@@ -1,14 +1,360 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-class login extends StatefulWidget {
-  const login({Key? key}) : super(key: key);
+
+class Login extends StatefulWidget {
+  var user_type;
+  Login(this.user_type);
   @override
-  _loginState createState() => _loginState();
+  _LoginState createState() => _LoginState(user_type);
 }
 
-class _loginState extends State<login> {
+class _LoginState extends State<Login> {
+  var user_type;
+  _LoginState(this.user_type);
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    bool login = true;
+    TextEditingController usr = new TextEditingController();
+    TextEditingController pwd = new TextEditingController();
+    TextEditingController cpwd = new TextEditingController();
+    return Scaffold(
+      body: Stack(
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 36.0, left: 8),
+                child: Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.all(Radius.circular(25))),
+                  child: Icon(
+                    Icons.arrow_back_rounded,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 150,
+              ),
+              Row(
+                children: [
+                  (login == true)
+                      ? Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                login = true;
+                              });
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Color(0xFF8EC16F),
+                                borderRadius: BorderRadius.all(Radius.circular(28)),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Container(
+                                  height: 50,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFF8EC16F),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(25)),
+                                  ),
+                                  child: Center(
+                                      child: Text(
+                                    'LOGIN',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontSize: 20),
+                                  )),
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                login = true;
+                              });
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Color(0xFF8EC16F),
+                                borderRadius: BorderRadius.all(Radius.circular(28)),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Container(
+                                  height: 50,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(25)),
+                                  ),
+                                  child: Center(
+                                      child: Text(
+                                    'LOGIN',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFF8EC16F),
+                                        fontSize: 20),
+                                  )),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                  (login == true)
+                      ? Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                login = false;
+                              });
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Color(0xFF8EC16F),
+                                borderRadius: BorderRadius.all(Radius.circular(28)),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Container(
+                                  height: 50,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(25)),
+                                  ),
+                                  child: Center(
+                                      child: Text(
+                                    'SIGNUP',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFF8EC16F),
+                                        fontSize: 20),
+                                  )),
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                login = false;
+                              });
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Color(0xFF8EC16F),
+                                borderRadius: BorderRadius.all(Radius.circular(28)),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Container(
+                                  height: 50,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFF8EC16F),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(25)),
+                                  ),
+                                  child: Center(
+                                      child: Text(
+                                    'SIGNUP',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontSize: 20),
+                                  )),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                ],
+              ),
+              (login == true)
+                  ? Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.green.withOpacity(0.1),
+                            borderRadius: BorderRadius.all(Radius.circular(20))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20),
+                                    ),
+                                  ),
+                                  child: TextField(
+                                    controller: usr,
+                                    decoration: InputDecoration(
+                                      hintText: " Email ",
+                                      prefixIcon: Icon(Icons.person_rounded),
+                                      border: InputBorder.none,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20),
+                                    ),
+                                  ),
+                                  child: TextField(
+                                    controller: pwd,
+                                    decoration: InputDecoration(
+                                      hintText: " password ",
+                                      prefixIcon: Icon(Icons.lock_rounded),
+                                      border: InputBorder.none,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.green.withOpacity(0.1),
+                            borderRadius: BorderRadius.all(Radius.circular(20))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20),
+                                    ),
+                                  ),
+                                  child: TextField(
+                                    controller: usr,
+                                    decoration: InputDecoration(
+                                      hintText: " Email  ",
+                                      prefixIcon: Icon(Icons.person_rounded),
+                                      border: InputBorder.none,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20),
+                                    ),
+                                  ),
+                                  child: TextField(
+                                    controller: pwd,
+                                    decoration: InputDecoration(
+                                      hintText: " password ",
+                                      prefixIcon: Icon(Icons.lock_rounded),
+                                      border: InputBorder.none,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20),
+                                    ),
+                                  ),
+                                  child: TextField(
+                                    controller: cpwd,
+                                    decoration: InputDecoration(
+                                      hintText: " Confirm password ",
+                                      prefixIcon: Icon(Icons.lock_rounded),
+                                      border: InputBorder.none,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+            ],
+          ),
+        ],
+      ),
+      floatingActionButton: GestureDetector(onTap: (){},
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            (login==true)?
+            Text(
+              'Login',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.grey),
+            ):
+            Text(
+              'Sign up',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.grey),
+            ),
+            Container(
+              height: 50,
+              width: 50,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(25))),
+              child: Icon(
+                Icons.arrow_forward_rounded,
+                color: Color(0xFF2FB37B),
+                size: 30,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
