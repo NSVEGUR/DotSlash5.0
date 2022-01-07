@@ -102,15 +102,16 @@ class Farmer{
         }
      });
     requiredQuantity = double.parse(requiredQuantity);
+
+    //Dele
     await _firestore
     .collection('crops').doc(cropId).collection('buyRequests').doc(availableQuantity).delete();
     availableQuantity = double.parse(availableQuantity);
     availableQuantity = availableQuantity - requiredQuantity;
-    if(availableQuantity != 0)
-      {
+    if(availableQuantity != 0) {
         await _firestore
             .collection('crops').doc(cropId).collection('buyRequests').doc(availableQuantity).set({
-          `
+            "quantity": availableQuantity
         });
       }
 
