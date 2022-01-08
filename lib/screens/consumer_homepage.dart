@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dotslash5/screens/consumer_buy.dart';
 import 'package:lottie/lottie.dart';
+
 class Chome extends StatefulWidget {
   const Chome({Key? key}) : super(key: key);
 
@@ -12,7 +13,7 @@ class Chome extends StatefulWidget {
 class _ChomeState extends State<Chome> {
   @override
   Widget build(BuildContext context) {
-    var balance=500;
+    var balance = 500;
     return Scaffold(
       backgroundColor: Colors.red.withOpacity(0.8),
       body: Column(
@@ -20,54 +21,26 @@ class _ChomeState extends State<Chome> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           //Balance Text
-          SizedBox(height: 80,),
-          // Container(
-          //   height: 150,
-          //   width: 200,
-          //   decoration: const BoxDecoration(
-          //     gradient: LinearGradient(
-          //         begin: Alignment.topRight,
-          //         end: Alignment.bottomLeft,
-          //         colors: [Colors.lightBlueAccent, Colors.blueAccent]),
-          //     borderRadius: BorderRadius.all(Radius.circular(20)),
-          //   ),
-          //   child: Padding(
-          //     padding: const EdgeInsets.only(
-          //         top: 40, left: 32, right: 32, bottom: 32),
-          //     child: Column(
-          //       children: [
-          //         const Text('Balance ',
-          //             style: TextStyle(
-          //               fontWeight: FontWeight.bold,
-          //               fontSize: 26,
-          //             )),
-          //         Text(
-          //           balance.toString(),
-          //           style: const TextStyle(
-          //             fontSize: 24,
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
-
+          SizedBox(
+            height: 80,
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
               height: 100,
               width: 150,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(25)),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: const Text('Balance ',
+                    const Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: Text('Balance ',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -77,7 +50,7 @@ class _ChomeState extends State<Chome> {
                       padding: const EdgeInsets.all(4.0),
                       child: Center(
                         child: Text(
-                          '₹ '+balance.toString(),
+                          '₹ ' + balance.toString(),
                           style: const TextStyle(
                             fontSize: 32,
                           ),
@@ -91,18 +64,20 @@ class _ChomeState extends State<Chome> {
           ),
           Container(
               height: 50,
-              decoration:BoxDecoration(
+              decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.only(topRight: Radius.circular(50),topLeft: Radius.circular(50))
-              )
-          ),
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(50),
+                      topLeft: Radius.circular(50)))),
+          //4 iconsn
           Container(
             color: Colors.white,
             child: Column(
               children: [
                 //First row
                 Padding(
-                  padding: const EdgeInsets.only(top: 32.0, left: 32, right: 32),
+                  padding:
+                      const EdgeInsets.only(top: 32.0, left: 32, right: 32),
                   child: Center(
                     child: Row(
                       children: [
@@ -125,24 +100,14 @@ class _ChomeState extends State<Chome> {
                                     decoration: BoxDecoration(
                                       color: Colors.red.withOpacity(0.7),
                                       borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
+                                          BorderRadius.all(Radius.circular(20)),
                                     ),
                                     child: Lottie.network(
-                                        'https://assets5.lottiefiles.com/packages/lf20_1rxvx0be.json'),
+                                        'https://assets2.lottiefiles.com/packages/lf20_yf4hb6ol.json'),
                                   ),
                                 ),
-                                Text('Add a crop'),
-                              ],
-                            ),
-                          ),
-                        ),
-                        //TODO sell the crop
-                        Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Center(
-                                child: Padding(
+                                Text('Buy a crop'),
+                                Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Center(
                                     child: Column(
@@ -159,95 +124,35 @@ class _ChomeState extends State<Chome> {
                                               height: 100,
                                               width: 100,
                                               decoration: BoxDecoration(
-                                                color: Colors.red.withOpacity(0.7),
-                                                borderRadius: BorderRadius.all(
+                                                color:
+                                                    Colors.red.withOpacity(0.7),
+                                                borderRadius: const BorderRadius.all(
                                                     Radius.circular(20)),
                                               ),
                                               child: Lottie.network(
-                                                  'https://assets10.lottiefiles.com/private_files/lf30_tcuqw7ib.json')),
+                                                  'https://assets6.lottiefiles.com/packages/lf20_Xmi2ep.json')
+                                          ),
                                         ),
-                                        Text('Sell your crop'),
+                                        Text('My transaction history'),
                                       ],
                                     ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
-                //Second row
-                Padding(
-                  padding: const EdgeInsets.only(left: 14.0),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Center(
-                          child: Column(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Cbuy(),
-                                      ));
-                                },
-                                child: Container(
-                                    height: 100,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                      color: Colors.red.withOpacity(0.7),
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                    ),
-                                    child: Lottie.network(
-                                        'https://assets6.lottiefiles.com/packages/lf20_Xmi2ep.json')),
-                              ),
-                              Text('My transaction history'),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Center(
-                          child: Column(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Cbuy(),
-                                      ));
-                                },
-                                child: Container(
-                                    height: 100,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                      color: Colors.red.withOpacity(0.7),
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                    ),
-                                    child: Lottie.network(
-                                        'https://assets1.lottiefiles.com/packages/lf20_ivftmpdk.json')),
-                              ),
-                              Text('Find a transport'),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],),),
-          Expanded(child: Container(color: Colors.white,))
-
+              ],
+            ),
+          ),
+          Expanded(
+              child: Container(
+            color: Colors.white,
+          ))
         ],
       ),
     );
