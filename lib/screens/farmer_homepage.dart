@@ -162,7 +162,7 @@ class _FhomeState extends State<Fhome> {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => Fsell(),
+                                              builder: (context) => Fsell(camera: Cameras.first
                                             ));
                                       },
                                       child: Container(
