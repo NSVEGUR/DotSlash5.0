@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:dotslash5/screens/farmer_homepage.dart';
 class Login extends StatefulWidget {
   var user_type;
   Login(this.user_type);
@@ -13,7 +13,7 @@ class _LoginState extends State<Login> {
   _LoginState(this.user_type);
   @override
   Widget build(BuildContext context) {
-    bool login = true;
+    bool login = false;
     TextEditingController usr = new TextEditingController();
     TextEditingController pwd = new TextEditingController();
     TextEditingController cpwd = new TextEditingController();
@@ -325,37 +325,44 @@ class _LoginState extends State<Login> {
           ),
         ],
       ),
-      floatingActionButton: GestureDetector(onTap: (){},
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            (login==true)?
-            Text(
-              'Login',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.grey),
-            ):
-            Text(
-              'Sign up',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.grey),
-            ),
-            Container(
-              height: 50,
-              width: 50,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(25))),
-              child: Icon(
-                Icons.arrow_forward_rounded,
-                color: Color(0xFF2FB37B),
-                size: 30,
+      floatingActionButton: GestureDetector(onTap: (){
+        //TODO user login or signup
+      },
+        child: GestureDetector(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> Fhome(), ));
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              (login==true)?
+              Text(
+                'Login',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.grey),
+              ):
+              Text(
+                'Sign up',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.grey),
               ),
-            ),
-          ],
+              Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(25))),
+                child: Icon(
+                  Icons.arrow_forward_rounded,
+                  color: Color(0xFF2FB37B),
+                  size: 30,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
