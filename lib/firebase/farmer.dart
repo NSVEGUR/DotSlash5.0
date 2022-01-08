@@ -92,37 +92,39 @@ class Farmer{
   }
   //Accept Buy Request
    acceptRequest({required cropId, required buyerId, required requiredQuantity})async {
-    var availableQuantity;
-    await _firestore
-        .collection('farmer').doc(id)
-        .collection('crops').get().then((data)=>{
-      for(int i = 0; i < data.docs.length; i++)
-        {
-         if(data.docs[i].data()["cropId"] == cropId)
-           availableQuantity = data.docs[i].data()["quantity"]
-        }
+     var availableQuantity;
+     await _firestore
+         .collection('farmer').doc(id)
+         .collection('crops').get().then((data) =>
+     {
+       for(int i = 0; i < data.docs.length; i++)
+         {
+           if(data.docs[i].data()["cropId"] == cropId)
+             availableQuantity = data.docs[i].data()["quantity"]
+         }
      });
-    requiredQuantity = double.parse(requiredQuantity);
+     requiredQuantity = double.parse(requiredQuantity);
 
-    //Deleting the available quantity of crop
-    await _firestore
-    .collection('crops').doc(cropId).collection('buyRequests').doc(availableQuantity).delete();
-    availableQuantity = double.parse(availableQuantity);
-    availableQuantity = availableQuantity - requiredQuantity;
+     //Deleting the available quantity of crop
+     await _firestore
+         .collection('crops').doc(cropId).collection('buyRequests').doc(
+         availableQuantity).delete();
+     availableQuantity = double.parse(availableQuantity);
+     availableQuantity = availableQuantity - requiredQuantity;
 
-    //Adding if still some more crop exis
-    if(availableQuantity != 0) {
-        await _firestore
-            .collection('crops').doc(cropId)
-            .collection('buyRequests').doc(availableQuantity)
-            .set({
-            "quantity": availableQuantity
-             });
-      } else {
+     //Adding if still some more crop exis
+     if (availableQuantity != 0) {
+       await _firestore
+           .collection('crops').doc(cropId)
+           .collection('buyRequests').doc(availableQuantity)
+           .set({
+         "quantity": availableQuantity
+       });
+     } else {
        //Deleting in the farmer side
-      await _firestore
-          .collection('farmer').doc(id)
-          .collection('crops').doc(cropId).delete();
-    }
-
+       await _firestore
+           .collection('farmer').doc(id)
+           .collection('crops').doc(cropId).delete();
+     }
+   }
   }
