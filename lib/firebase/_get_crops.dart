@@ -23,3 +23,33 @@ getCrops()async{
   });
   return arr;
 }
+
+getRatePerKg({required cropId})async{
+  final _firestore = FirebaseFirestore.instance;
+  var ratePerKg;
+  await _firestore
+      .collection('crops')
+      .get().then((data)=>{
+    for(int i = 0; i < data.docs.length; i++)
+      {
+        if(data.docs[i].data()['uid'] == cropId)
+          ratePerKg = data.docs[i].data()['ratePerKg']
+      }
+  });
+  return ratePerKg;
+}
+
+getQuantity({required cropId})async{
+  final _firestore = FirebaseFirestore.instance;
+  var quantity;
+  await _firestore
+      .collection('crops')
+      .get().then((data)=>{
+    for(int i = 0; i < data.docs.length; i++)
+      {
+        if(data.docs[i].data()['uid'] == cropId)
+          quantity = data.docs[i].data()['quantity']
+      }
+  });
+  return quantity;
+}
