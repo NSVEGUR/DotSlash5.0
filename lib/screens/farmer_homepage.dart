@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dotslash5/screens/farmer_sell.dart';
 import 'package:dotslash5/screens/farmer_scan.dart';
