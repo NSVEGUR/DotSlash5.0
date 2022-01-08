@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dotslash5/screens/login.dart';
@@ -27,8 +28,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   @override
-      Widget build(BuildContext context) {
+void initState() {
+  super.initState();
+  Firebase.initializeApp().whenComplete(() {
+    print("Firebase Initialised Complete");
+    setState(() {});
+  });
+}
+  @override
+  Widget build(BuildContext context) {
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Colors.white,
@@ -72,7 +83,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16),
+                  const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16),
+
                   child: Text(
                     'its an app that connects farmers , middleman , traders and customers',
                     style: TextStyle(color: Colors.grey),
@@ -154,7 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-                
+
                 GestureDetector(
                   onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>Login(2)));
@@ -197,3 +209,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ));
   }
 }
+
+
+
+
+

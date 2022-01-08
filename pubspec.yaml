@@ -36,6 +36,7 @@ dependencies:
   firebase_storage: ^10.1.0
   #for generating unique ids:
   nanoid: ^1.0.0
+
   #for lottie animations:
   lottie: ^1.2.1
 
