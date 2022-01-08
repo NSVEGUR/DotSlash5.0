@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dotslash5/screens/farmer_homepage.dart';
+import 'package:dotslash5/screens/middleman_homepage.dart';
+import 'package:dotslash5/screens/consumer_homepage.dart';
+import 'package:dotslash5/screens/transporter_homepage.dart';
 class Login extends StatefulWidget {
   var user_type;
   Login(this.user_type);
@@ -330,7 +333,15 @@ class _LoginState extends State<Login> {
       },
         child: GestureDetector(
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> Fhome(), ));
+            if(user_type==0)
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> Fhome(), ));
+            else if(user_type==1)
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> Mhome(), ));
+            else if(user_type==2)
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> Chome(), ));
+            else
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> Thome(), ));
+
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,

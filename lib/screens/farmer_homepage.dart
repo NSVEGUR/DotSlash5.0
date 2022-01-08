@@ -127,7 +127,7 @@ class _FhomeState extends State<Fhome> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => Fsell(),
+                                      builder: (context) => Fscan(),
                                     ));
                               },
                               child: Container(
@@ -163,7 +163,7 @@ class _FhomeState extends State<Fhome> {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => Fscan(),
+                                              builder: (context) => Fsell(),
                                             ));
                                       },
                                       child: Container(

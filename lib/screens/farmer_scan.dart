@@ -10,6 +10,6 @@ class Fscan extends StatefulWidget {
 class _FscanState extends State<Fscan> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold();
   }
 }
