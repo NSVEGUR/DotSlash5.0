@@ -9,7 +9,7 @@ class Authenticate {
   String email;
   String password;
   String type;
-  static const types = ['farmer', 'middleMan', 'retailer'];
+  static const types = ['farmer', 'middleMan', 'consumer'];
   Authenticate({required this.email, required this.password, required this.type});
 
   signUp()async{

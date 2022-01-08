@@ -3,6 +3,8 @@ import 'package:nanoid/nanoid.dart';
 import '_crops.dart';
 import '_transactions.dart';
 import '_get_crops.dart';
+import '_get_crops_secondary.dart';
+import '_manage_crops_user.dart';
 
 class Farmer{
 
@@ -118,18 +120,17 @@ class Farmer{
   }
 
   //Accept Buy Request
-  acceptRequest({required cropId, required buyerId, required requiredQuantity})async {
-    var availableQuantity;
-    await _firestore
-        .collection('farmer').doc(id)
-        .collection('crops').get().then((data)=>{
-      for(int i = 0; i < data.docs.length; i++)
-        {
-          if(data.docs[i].data()["cropId"] == cropId)
-            availableQuantity = data.docs[i].data()["quantity"]
-        }
-    });
+  acceptRequest({required cropId, required buyerId, required requiredQuantity, required buyerType})async {
+    var availableQuantity = await getQuantity(cropId: cropId);
     requiredQuantity = double.parse(requiredQuantity);
+
+    //Making Transaction
+    var ratePerKg = await getRatePerKg(cropId: cropId);
+    var cropName = await getCropName(cropId: cropId);
+    ratePerKg = double.parse(ratePerKg);
+    var amount = requiredQuantity * ratePerKg;
+    await _addCropsSecondary(buyerId: buyerId, buyerType: buyerType, cropId: cropId, cropName: cropName, quantity: requiredQuantity, ratePerKg: ratePerKg);
+    await _sellCrop(amount: amount, cropId: cropId, buyerId: buyerId, buyerType: buyerType, requiredQuantity: requiredQuantity);
 
     //Deleting the available quantity of crop
     await _firestore
@@ -146,11 +147,26 @@ class Farmer{
         "quantity": availableQuantity
       });
     } else {
-      //Deleting in the farmer side
+      //Deleting in the farmer side and the crop
       await _firestore
           .collection('farmer').doc(id)
           .collection('crops').doc(cropId).delete();
+      await _firestore
+          .collection('crops').doc(cropId).delete();
     }
+  }
 
+  _sellCrop({required amount, required cropId, required buyerId, required buyerType, required requiredQuantity})async
+  {
+    final _transactions = Transactions(senderId: buyerId, senderType: buyerType, receiverId: id, receiverType: type, amount: amount, farmerId: id, cropId: cropId, quantity: requiredQuantity);
+    await _transactions.initiateTransaction();
+  }
+
+  _addCropsSecondary({required buyerId, required cropId, required cropName, required quantity, required ratePerKg, required buyerType}) async{
+    //Adding public
+    await addCropsSecondary(farmerId:  id, cropId: cropId, quantity: quantity, cropName: cropName, ratePerKg: ratePerKg, royaltyPercentage: royaltyPercentage);
+
+    //Adding to user(middleman/consumer)
+    await addCropsToUser(type: buyerType, id: buyerId, cropId: cropId, cropName: cropName, quantity: quantity, ratePerKg: ratePerKg);
   }
   }
