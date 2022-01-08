@@ -111,7 +111,7 @@ class Farmer{
     availableQuantity = double.parse(availableQuantity);
     availableQuantity = availableQuantity - requiredQuantity;
 
-    //Adding if still some more crop exists
+    //Adding if still some more crop exis
     if(availableQuantity != 0) {
         await _firestore
             .collection('crops').doc(cropId)
