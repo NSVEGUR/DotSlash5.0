@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dotslash5/screens/farmer_sell.dart';
 import 'package:dotslash5/screens/farmer_scan.dart';
 import 'package:lottie/lottie.dart';
+import 'package:alan_voice/alan_voice.dart';
 
 class Fhome extends StatefulWidget {
   const Fhome({Key? key}) : super(key: key);
@@ -13,6 +13,14 @@ class Fhome extends StatefulWidget {
 
 class _FhomeState extends State<Fhome> {
   @override
+  _FhomeState()
+  {
+    AlanVoice.addButton("d502206a3c6c981f50997663ba88498a2e956eca572e1d8b807a3e2338fdd0dc/stage",buttonAlign:AlanVoice.BUTTON_ALIGN_LEFT);
+    AlanVoice.onCommand.add((command) {
+    debugPrint("got new command ${command.toString()}");
+  });
+  }
+
   Widget build(BuildContext context) {
     var balance = 2500;
     return Scaffold(
@@ -22,7 +30,7 @@ class _FhomeState extends State<Fhome> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           //Balance Text
-          SizedBox(height: 80,),
+          const SizedBox(height: 80,),
           // Container(
           //   height: 150,
           //   width: 200,
@@ -59,7 +67,7 @@ class _FhomeState extends State<Fhome> {
             child: Container(
               height: 100,
               width: 150,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(25)),
               ),
