@@ -9,7 +9,7 @@ class Authenticate {
   String email;
   String password;
   String type;
-  static const types = ['farmer', 'middleMan', 'retailer'];
+  static const types = ['farmer', 'middleMan', 'consumer'];
   Authenticate({required this.email, required this.password, required this.type});
 
   signUp()async{
@@ -25,11 +25,8 @@ class Authenticate {
           await _firestore.collection(type).doc(newUser.uid).set({
             'email': newUser.email,
             'uid': newUser.uid,
-
             'userName': newUser.email!.split('@')[0],
-
             'balance': 0,
-            'transactions': 0,
             'royaltyPercentage': 0,
             'royaltySlab': 0,
           });

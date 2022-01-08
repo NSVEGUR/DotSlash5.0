@@ -1,26 +1,33 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nanoid/nanoid.dart';
 import '_crops.dart';
+import '_transactions.dart';
+import '_get_crops.dart';
+import '_get_crops_secondary.dart';
+import '_manage_crops_user.dart';
 
 class Farmer{
 
   //Variables
   String id;
+  late String type;
   var crops = [];
+  var balance;
   late String royaltyPercentage;
   final _firestore = FirebaseFirestore.instance;
 
 
   //Constructor
   Farmer({required this.id}){
-   _getCrops();
-   _getRoyaltyPercentage();
+    this.type = 'farmer';
+   getCrops();
+   getRoyaltyPercentage();
   }
 
   //To get Crops
-  _getCrops()async{
+  getCrops()async{
    await _firestore
-       .collection('farmer').doc(id)
+       .collection(type).doc(id)
        .collection('crops')
        .get().then((data)=>{
      for(int i = 0; i < data.docs.length; i++)
@@ -38,9 +45,9 @@ class Farmer{
   }
 
   //To get Royalty Percentage
-  _getRoyaltyPercentage()async{
+  getRoyaltyPercentage()async{
     await _firestore
-        .collection('farmer')
+        .collection(type)
         .get().then((data)=>{
       for(int i = 0; i < data.docs.length; i++)
         {
@@ -53,17 +60,38 @@ class Farmer{
 
   //To set Royalty Percentage
   setRoyaltyPercentage({required royaltyPercentage}) async{
-    await _firestore.collection('farmer').doc(id).set({
+    await _firestore.collection(type).doc(id).set({
       'royaltyPercentage': royaltyPercentage
+    });
+  }
+
+  //To get balance
+  getBalance()async{
+    await _firestore
+        .collection(type)
+        .get().then((data)=>{
+      for(int i = 0; i < data.docs.length; i++)
+        {
+          if(data.docs[i].data()['uid'] == id)
+            balance = data.docs[i].data()['balance']
+        }
+    });
+    return balance;
+  }
+
+  //To set balance
+  setBalance({required balance})async{
+    await _firestore.collection(type).doc(id).set({
+      'balance': balance
     });
   }
 
   //To add new crop
   addCrop({required cropName, required quantity, required ratePerKg}) async {
     var cropId = nanoid(10);
-    var royaltyPercentage = await _getRoyaltyPercentage();
+    var royaltyPercentage = await getRoyaltyPercentage();
     Crops(farmerId: id, cropName: cropName, cropId: cropId, royaltyPercentage: royaltyPercentage, quantity: quantity, ratePerKg: ratePerKg);
-    await _firestore.collection('farmer').doc(id).collection('crops').doc(cropId).set({
+    await _firestore.collection(type).doc(id).collection('crops').doc(cropId).set({
         "cropName": cropName,
         "cropId": cropId,
         "quantity": quantity,
@@ -90,39 +118,55 @@ class Farmer{
     });
     return arr;
   }
+
   //Accept Buy Request
-   acceptRequest({required cropId, required buyerId, required requiredQuantity})async {
-    var availableQuantity;
-    await _firestore
-        .collection('farmer').doc(id)
-        .collection('crops').get().then((data)=>{
-      for(int i = 0; i < data.docs.length; i++)
-        {
-         if(data.docs[i].data()["cropId"] == cropId)
-           availableQuantity = data.docs[i].data()["quantity"]
-        }
-     });
+  acceptRequest({required cropId, required buyerId, required requiredQuantity, required buyerType})async {
+    var availableQuantity = await getQuantity(cropId: cropId);
     requiredQuantity = double.parse(requiredQuantity);
+
+    //Making Transaction
+    var ratePerKg = await getRatePerKg(cropId: cropId);
+    var cropName = await getCropName(cropId: cropId);
+    ratePerKg = double.parse(ratePerKg);
+    var amount = requiredQuantity * ratePerKg;
+    await _addCropsSecondary(buyerId: buyerId, buyerType: buyerType, cropId: cropId, cropName: cropName, quantity: requiredQuantity, ratePerKg: ratePerKg);
+    await _sellCrop(amount: amount, cropId: cropId, buyerId: buyerId, buyerType: buyerType, requiredQuantity: requiredQuantity);
 
     //Deleting the available quantity of crop
     await _firestore
-    .collection('crops').doc(cropId).collection('buyRequests').doc(availableQuantity).delete();
+        .collection('crops').doc(cropId).collection('buyRequests').doc(availableQuantity).delete();
     availableQuantity = double.parse(availableQuantity);
     availableQuantity = availableQuantity - requiredQuantity;
 
     //Adding if still some more crop exis
     if(availableQuantity != 0) {
-        await _firestore
-            .collection('crops').doc(cropId)
-            .collection('buyRequests').doc(availableQuantity)
-            .set({
-            "quantity": availableQuantity
-             });
-      } else {
-       //Deleting in the farmer side
+      await _firestore
+          .collection('crops').doc(cropId)
+          .collection('buyRequests').doc(availableQuantity)
+          .set({
+        "quantity": availableQuantity
+      });
+    } else {
+      //Deleting in the farmer side and the crop
       await _firestore
           .collection('farmer').doc(id)
           .collection('crops').doc(cropId).delete();
+      await _firestore
+          .collection('crops').doc(cropId).delete();
     }
+  }
 
+  _sellCrop({required amount, required cropId, required buyerId, required buyerType, required requiredQuantity})async
+  {
+    final _transactions = Transactions(senderId: buyerId, senderType: buyerType, receiverId: id, receiverType: type, amount: amount, farmerId: id, cropId: cropId, quantity: requiredQuantity);
+    await _transactions.initiateTransaction();
+  }
+
+  _addCropsSecondary({required buyerId, required cropId, required cropName, required quantity, required ratePerKg, required buyerType}) async{
+    //Adding public
+    await addCropsSecondary(farmerId:  id, cropId: cropId, quantity: quantity, cropName: cropName, ratePerKg: ratePerKg, royaltyPercentage: royaltyPercentage);
+
+    //Adding to user(middleman/consumer)
+    await addCropsToUser(type: buyerType, id: buyerId, cropId: cropId, cropName: cropName, quantity: quantity, ratePerKg: ratePerKg);
+  }
   }
