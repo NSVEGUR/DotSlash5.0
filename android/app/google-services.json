@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:526618632838:android:f76b9dd2feb437df0fe707",
+        "mobilesdk_app_id": "1:526618632838:android:86b65a2c9135bdce0fe707",
         "android_client_info": {
-          "package_name": "com.example.dotslash5"
+          "package_name": "com.dotSlash5.app"
         }
       },
       "oauth_client": [

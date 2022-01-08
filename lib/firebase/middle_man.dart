@@ -12,7 +12,7 @@ class MiddleMan{
   MiddleMan({required this.id});
 
   //To set Royalty Slab
-  setRoyaltyPercentage({required royaltySlab}) async{
+  setRoyaltySlab({required royaltySlab}) async{
     await _firestore.collection('middleMan').doc(id).set({
       'royaltySlab': royaltySlab
     });
