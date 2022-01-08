@@ -1,11 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+addCropsSecondary({required farmerId, required cropId, required quantity, required cropName, required ratePerKg, required royaltyPercentage})async{
+  final _firestore = FirebaseFirestore.instance;
+  await _firestore.collection('secondaryCrops').doc(cropId).set({
+    "cropId": cropId,
+    "cropName": cropName,
+    "farmerId": farmerId,
+    "quantity": quantity,
+    "ratePerKg": ratePerKg,
+    "royaltyPercentage": royaltyPercentage,
+  });
+}
 
-getCrops()async{
+getCropsSecondary()async{
   final _firestore = FirebaseFirestore.instance;
   var arr = [];
   await _firestore
-      .collection('crops')
+      .collection('secondaryCrops')
       .get()
       .then((data) => {
     for(int i = 0; i < data.docs.length; i++)
@@ -24,11 +35,11 @@ getCrops()async{
   return arr;
 }
 
-getCropName({required cropId})async{
+getCropNameSecondary({required cropId})async{
   final _firestore = FirebaseFirestore.instance;
   var cropName;
   await _firestore
-      .collection('crops')
+      .collection('secondaryCrops')
       .get().then((data)=>{
     for(int i = 0; i < data.docs.length; i++)
       {
@@ -39,11 +50,11 @@ getCropName({required cropId})async{
   return cropName;
 }
 
-getRatePerKg({required cropId})async{
+getRatePerKgSecondary({required cropId})async{
   final _firestore = FirebaseFirestore.instance;
   var ratePerKg;
   await _firestore
-      .collection('crops')
+      .collection('secondaryCrops')
       .get().then((data)=>{
     for(int i = 0; i < data.docs.length; i++)
       {
@@ -54,11 +65,11 @@ getRatePerKg({required cropId})async{
   return ratePerKg;
 }
 
-getQuantity({required cropId})async{
+getQuantitySecondary({required cropId})async{
   final _firestore = FirebaseFirestore.instance;
   var quantity;
   await _firestore
-      .collection('crops')
+      .collection('secondaryCrops')
       .get().then((data)=>{
     for(int i = 0; i < data.docs.length; i++)
       {
