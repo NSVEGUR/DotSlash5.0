@@ -13,6 +13,7 @@ class MiddleMan{
 
   //To set Royalty Slab
   setRoyaltySlab({required royaltySlab}) async{
+
     await _firestore.collection('middleMan').doc(id).set({
       'royaltySlab': royaltySlab
     });

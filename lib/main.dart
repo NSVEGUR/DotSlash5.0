@@ -39,6 +39,7 @@ void initState() {
 }
   @override
   Widget build(BuildContext context) {
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Colors.white,
@@ -83,6 +84,7 @@ void initState() {
                 Padding(
                   padding:
                   const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16),
+
                   child: Text(
                     'its an app that connects farmers , middleman , traders and customers',
                     style: TextStyle(color: Colors.grey),

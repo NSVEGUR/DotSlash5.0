@@ -25,7 +25,9 @@ class Authenticate {
           await _firestore.collection(type).doc(newUser.uid).set({
             'email': newUser.email,
             'uid': newUser.uid,
+
             'userName': newUser.email!.split('@')[0],
+
             'balance': 0,
             'transactions': 0,
             'royaltyPercentage': 0,

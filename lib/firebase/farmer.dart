@@ -90,9 +90,8 @@ class Farmer{
     });
     return arr;
   }
-
   //Accept Buy Request
-  acceptRequest({required cropId, required buyerId, required requiredQuantity})async {
+   acceptRequest({required cropId, required buyerId, required requiredQuantity})async {
     var availableQuantity;
     await _firestore
         .collection('farmer').doc(id)
@@ -127,6 +126,3 @@ class Farmer{
     }
 
   }
-
-
-}
