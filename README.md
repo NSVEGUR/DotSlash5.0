@@ -1,4 +1,4 @@
-# Agri Connect
+# Agri Connect 
 ## Introduction
 This repository is the project of Team 119 (IIITDM) of DotSlash 5.0 hackathon. 
 Our motivation is to ensure that farmers get a maximum profits for their crop and not middlemen. We have done this through giving royalty to farmer on each transaction of that crop. By following this famrer earns money and is not exploited. 
